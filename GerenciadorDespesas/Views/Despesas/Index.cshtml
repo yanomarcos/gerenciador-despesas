@@ -12,7 +12,7 @@
             <a asp-action="Create" class="btn btn-outline-primary btn-sm">Nova despesa</a>
         </p>
 
-        @if(TempData["Confirmacao"] != null)
+        @if (TempData["Confirmacao"] != null)
         {
             <h6 class="alert alert-success">@TempData["Confirmacao"]</h6>
         }
@@ -30,7 +30,12 @@
             <div class="col">
                 <partial name="_GastoTotalMes" />
             </div>
+
+            <div class="col">
+                <partial name="_GastoMes" />
+            </div>
         </div>
+
 
         <div class="tabelaPrincipal">
             <table class="table table-hover">
@@ -77,8 +82,8 @@
 
 @Html.PagedListPager(Model, pagina => Url.Action("Index", "Despesas", new { pagina }), new PagedListRenderOptionsBase
 {
-    LiElementClasses = new string[] { "page-item" },
-    PageClasses = new string[] { "page-link" }
+LiElementClasses = new string[] { "page-item" },
+PageClasses = new string[] { "page-link" }
 })
 
 <div class="modal" tabindex="-1" role="dialog">
@@ -103,11 +108,14 @@
 
 @section Scripts{
 
+    <script src="~/js/MetodosGerais.js"></script>
+    <script src="~/js/GraficoGastoMes.js"></script>
     <script src="~/js/GraficoTotalMes.js"></script>
 
     <script>
 
-    CarregarDadosGastosTotaisMes();
+        CarregarDadosGastosMes();
+        CarregarDadosGastosTotaisMes();
 
         function ExibirModal(id) {
             $(".modal").modal();
