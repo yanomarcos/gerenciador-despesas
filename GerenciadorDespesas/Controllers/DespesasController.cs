@@ -25,6 +25,8 @@ namespace GerenciadorDespesas.Controllers
             const int itensPagina = 10;
             int numeroPagina = (pagina ?? 1);
 
+            ViewData["Meses"] = new SelectList(_context.Meses.Where(x => x.MesId == x.Salarios.MesId), "MesId", "Nome");
+
             var contexto = _context.Despesas.Include(d => d.Meses).Include(d => d.TipoDespesas).OrderBy(d => d.MesId);
             return View(await contexto.ToPagedListAsync(numeroPagina, itensPagina));
         }
